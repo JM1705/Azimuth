@@ -1,0 +1,31 @@
+{
+	"Author": "JM1705",
+	"Name": "Itchio like",
+	"Comment": "This is JM1705's style file for Azimuth inspired by itch.io's game jams calender, use it as you wish.",
+	"Seperator": " | ",
+	"TimelineOffset": 10,
+	"TimelineTextOffset": 3,
+	"BaseYOffset": 3,
+	"Height": 30,
+	"PeriodYSpace": 5,
+	"PeriodXSpace": 2,
+	"WidthReduce": 10,
+	"LongTickLength": 10,
+	"LongTickThickness": 1,
+	"ShortTickLength": 5,
+	"ShortTickThickness": 1,
+	"RoundRadius": 5,
+	"FontSize": 12,
+	"DarkMode": {
+		"Saturation": 0.6,
+		"Value": 0.3,
+		"TextColour": "white",
+		"TickColour": "white"
+	},
+	"LightMode": {
+		"Saturation": 0.6,
+		"Value": 1,
+		"TextColour": "black",
+		"TickColour": "black"
+	}
+}

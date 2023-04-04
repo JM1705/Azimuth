@@ -1,0 +1,6 @@
+*.spec
+compile.bat
+Exports/
+dist/
+build/
+__pycache__/
