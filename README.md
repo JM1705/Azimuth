@@ -2,6 +2,8 @@
 ## A simple script to set your compass schedule as your Windows wallpaper
 A rewrite of CompassBG, with a more reliable script and a nicer UI
 
+#[BROKEN] As of 2023-07-30, due to the change in Compass' API, this program has been broken. I'll try to adapt the code to work with the new API, but no promises.
+
 ![image](https://user-images.githubusercontent.com/73152770/228744545-03d33a4e-afdd-498a-83c4-9cd9bf1ed2eb.png)
 
 I haven't written a port for linux **yet**. It's only available on Windows.
