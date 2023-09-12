@@ -62,7 +62,7 @@ if createcfg == True:
     schoolcode = input("School code: ")
 
     print("")
-    print("Enter your compass login token. For a guide on how to obtain this, visit https://github.com/JM1705/Azimuth/blob/main/README.md")
+    print("Enter your compass login token. For a guide on how to obtain this, visit https://github.com/JM1705/Azimuth/blob/main/Token.md")
     token = input("Compass login token: ")
 
     cfg = {
