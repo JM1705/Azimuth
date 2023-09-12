@@ -2,6 +2,8 @@
 ## A simple script to set your compass schedule as your Windows wallpaper
 A rewrite of CompassBG, with a more reliable script and a nicer GUI
 
+## BROKEN as of 2023-07-30, due to a change in Compass' API. I'll try to adapt the code to work with the new API, but no promises.
+
 ![image](https://user-images.githubusercontent.com/73152770/228744545-03d33a4e-afdd-498a-83c4-9cd9bf1ed2eb.png)
 
 Multi monitor support is only present on Linux+KDE, and will be unavailable on Windows.
