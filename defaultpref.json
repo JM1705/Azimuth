@@ -1,13 +1,8 @@
 {
-	"Comment": "This is JM1705's preferences file for Azimuth, use it as you wish. The SubjectColours are just the hues of the colours btw",
+	"Comment": "This is JM1705's preferences file for Azimuth, use it as you wish. The SubjectColours are just the hues of the colours.",
 	"SubjectColours": {
-		"11SMPB5B": 0.646,
-		"11SMPA3B": 0.646,
-		"12LJAP4A": 0.875,
-		"11SCHE1B": 0.166,
-		"11EENG6G": 0.32,
-		"12MMET2A": 0.521,
-		"MENTFL1": 0.0
+		"Music": 0.646,
+		"English": 0.532
 	},
 	"Darkmode": true,
 	"IncludeTeacher": false

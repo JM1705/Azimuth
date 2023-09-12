@@ -1,10 +1,12 @@
 # Azimuth
 ## A simple script to set your compass schedule as your Windows wallpaper
-A rewrite of CompassBG, with a more reliable script and a nicer UI
+A rewrite of CompassBG, with a more reliable script and a nicer GUI
 
 ![image](https://user-images.githubusercontent.com/73152770/228744545-03d33a4e-afdd-498a-83c4-9cd9bf1ed2eb.png)
 
-I haven't written a port for linux **yet**. It's only available on Windows.
+Multi monitor support is only present on Linux+KDE, and will be unavailable on Windows.
+
+Windows instructions:
 
 Step 0:
  Download the latest release of Azimuth from the "Releases" section of this github
