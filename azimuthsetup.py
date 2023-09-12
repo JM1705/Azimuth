@@ -1,3 +1,6 @@
+import platform
+system = platform.system()
+print("Detected "+system)
 from pathlib import Path
 from os import getenv, path, listdir
 from json import load, dump
@@ -14,12 +17,16 @@ def yntobool(yn, default):
     return boolean
 
 # Paths
-scriptLoc = path.dirname(path.realpath(__file__))
-bgpath = str(Path.home())+"\\Pictures\\Azimuth"
-appdata = getenv('LOCALAPPDATA') + '\\Azimuth'
+scriptLoc = path.dirname(path.realpath(__file__)).replace(("\\"), ("/"))
+HOME = str(Path.home()).replace(("\\"), ("/"))
+if system == "Windows":
+    appdata = getenv('LOCALAPPDATA').replace(("\\"), ("/")) + '/Azimuth'
+if system == "Linux":
+    appdata = HOME+"/.config/azimuth"
+bgpath = HOME.replace(("\\"), ("/"))+"/Pictures/Azimuth"
 
 # Constant
-version = open(scriptLoc+"\\azimuth.version","r").read()
+version = open(scriptLoc.replace(("\\"), ("/"))+"/azimuth.version","r").read()
 
 # Create directories if they do not exist
 createPaths = [bgpath, appdata]
@@ -32,7 +39,7 @@ for i in range(len(createPaths)):
         Path(createPaths[i]).mkdir(parents=True, exist_ok=True)
 
 # Check if to create configuration file
-cfgLoc = appdata+"\\cfg.json"
+cfgLoc = appdata+"/cfg.json"
 if path.isfile(cfgLoc):
     try:
         cfg = load(open(cfgLoc, "r"))
@@ -55,25 +62,12 @@ if createcfg == True:
     schoolcode = input("School code: ")
 
     print("")
-    print("Enter your compass username")
-    username = input("Username: ")
-
-    print("")
-    print("Enter your compass password")
-    print("Warning: The password is stored unencrypted on your device, just like when you save your password in your browser")
-    passwordsaresame=False
-    while not passwordsaresame:
-        password = getpass("Password: ")
-        password2 = getpass("Confirm password: ")
-        if password == password2:
-            passwordsaresame=True
-        else:
-            print("The passwords don't match. Try again")
+    print("Enter your compass login token. For a guide on how to obtain this, visit https://github.com/JM1705/Azimuth/blob/main/README.md")
+    token = input("Compass login token: ")
 
     cfg = {
         "version": version,
-        "user": username,
-        "pass": password,
+        "sessionid": token,
         "school_code": schoolcode
     }
     dump(cfg, open(cfgLoc, 'w'), indent = '\t')
@@ -82,7 +76,7 @@ if createcfg == True:
 
 # Check if to create styles file
 print("")
-styleLoc = appdata+"\\style.json"
+styleLoc = appdata+"/style.json"
 if path.isfile(styleLoc):
     try:
         style = load(open(styleLoc, "r"))
@@ -97,7 +91,7 @@ else:
 
 if createstyle:
     print("")
-    style = load(open(scriptLoc+"\\defaultstyle.json", "r"))
+    style = load(open(scriptLoc+"/defaultstyle.json", "r"))
     style['Version']=version
     dump(style, open(styleLoc, 'w'), indent = '\t')
     print("")
@@ -106,7 +100,7 @@ if createstyle:
 
 # Check if to create preferences file
 print("")
-prefLoc = appdata+"\\pref.json"
+prefLoc = appdata+"/pref.json"
 if path.isfile(prefLoc):
     try:
         pref = load(open(prefLoc, "r"))
@@ -122,7 +116,7 @@ else:
 # Create preferences file
 if createPrefs:
     print("")
-    pref = load(open(scriptLoc+"\\defaultpref.json", "r"))
+    pref = load(open(scriptLoc+"/defaultpref.json", "r"))
     pref["Version"]=version
     pref["Darkmode"]=yntobool(input("Use dark mode? (y(default),n) "),True)
     pref["IncludeTeacher"]=yntobool(input("Include teacher code in the UI? (y(default),n) "),True)

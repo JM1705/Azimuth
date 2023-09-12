@@ -1,0 +1,22 @@
+{
+	"Comment": "This is the compatibility file bundled with each Azimuth release, to indicate which older versions of configuration  files are compatible with the version of the script.",
+	"pref": {
+		"0.0.1": false,
+		"0.0.2": false,
+		"0.0.3": false,
+		"0.1.0": true
+	},
+	"cfg": {
+		"0.0.1": false,
+		"0.0.2": false,
+		"0.0.3": false,
+		"0.1.0": true
+	},
+	"style": {
+		"0.0.1": false,
+		"0.0.2": false,
+		"0.0.3": false,
+		"0.1.0": true
+	},
+	"Version": "0.1.0"
+}
