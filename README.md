@@ -1,12 +1,31 @@
 # Azimuth
 ## A simple script to set your compass schedule as your Windows wallpaper
-A rewrite of CompassBG, with a more reliable script and a nicer GUI
+A rewrite of CompassBG, with a more reliable script and a nicer GUI, multithreaded requests and Linux support
 
 ![image](https://user-images.githubusercontent.com/73152770/228744545-03d33a4e-afdd-498a-83c4-9cd9bf1ed2eb.png)
 
 Multi monitor support is only present on Linux+KDE, and will be unavailable on Windows.
+I've only made a wallpaper setting script for KDE and Windows, if you want one for GNOME or another DE/WM, you can easily make one yourself. 
+If you are interested in this, have a look at kwall.py, which is my wallpaper setting script for KDE. 
 
-Windows instructions:
+**Linux+KDE instructions:**
+
+Step 0: 
+	Download the repository
+
+Step 1:
+	Get your Compass Login token: https://github.com/JM1705/Azimuth/blob/main/Token.md
+
+Step 2:
+	Run azimuthsetup.py
+
+Step 3:
+	Run azimuth.py
+
+Step 4 (Optional):
+	Create a bash script (.sh) to run azimuth.py. Make this sciript executable (chmod) and add this script to StartupAndShutdown/Autostart in the KDE settings.
+
+**Windows instructions (Deprecated):**
 
 Step 0:
  Download the latest release of Azimuth from the "Releases" section of this github
