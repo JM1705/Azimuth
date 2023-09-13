@@ -14,7 +14,7 @@ Step 0:
 	Download the repository
 
 Step 1:
-	Get your Compass Login token: https://github.com/JM1705/Azimuth/blob/main/Token.md
+	[Get your Compass Login token](https://github.com/JM1705/Azimuth/blob/main/Token.md)
 
 Step 2:
 	Run azimuthsetup.py
