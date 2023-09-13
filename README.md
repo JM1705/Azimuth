@@ -1,5 +1,5 @@
 # Azimuth
-## A simple script to set your compass schedule as your Windows wallpaper
+## A simple script to set your compass schedule as your desktop wallpaper
 A rewrite of CompassBG, with a more reliable script and a nicer GUI, multithreaded requests and Linux support
 
 ![image](https://user-images.githubusercontent.com/73152770/228744545-03d33a4e-afdd-498a-83c4-9cd9bf1ed2eb.png)
@@ -28,7 +28,7 @@ Step 4 (Optional):
 **Windows instructions (Deprecated):**
 
 Step 0:
- Download the latest release of Azimuth from the "Releases" section of this github
+	Download the latest release of Azimuth from the ["Releases" section of this github](https://github.com/JM1705/Azimuth/releases)
 
 Step 1:
 	Place the Azimuth folder in your preferred location
@@ -59,7 +59,7 @@ Step 4 (Optional):
 ## Other instructions
 
 To edit settings or create the settings file manually:
-	Run azimuthsetup.exe
+	Run azimuthsetup.exe or azimuthsetup.py
 
 ## Troubleshooting
 
