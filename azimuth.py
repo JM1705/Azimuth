@@ -3,6 +3,7 @@ system = platform.system()
 if system == "Linux":
     from os import environ
     desktop_session = environ.get("DESKTOP_SESSION")
+    print(desktop_session)
     print("Detected "+system+" with "+desktop_session)
 else:
     print("Detected "+system)
@@ -238,7 +239,8 @@ periods.sort(key=lambda item: item.get('length'))
 # Import liblaries for drawing the UI
 advPrint("Loading the rest of the liblaries")
 from PIL import Image, ImageDraw, ImageFont
-from screeninfo import get_monitors
+# from screeninfo import get_monitors
+from monitors import get_monitors
 from colorsys import hsv_to_rgb
 import hashlib
 
@@ -264,7 +266,7 @@ shorttickthickness = style['ShortTickThickness']    # Thickness of the short tic
 roundradius = style['RoundRadius']                  # Radius of squares for periods
 fontsize = style['FontSize']                        # Size of text
 
-font=ImageFont.truetype(scriptLoc+"/Inter-SemiBold.otf", size=fontsize)
+font=ImageFont.truetype("/usr/share/fonts/NotoSans-Medium.ttf", size=fontsize)
 heightIncrement = height+periodyspace
 
 if darkmode:
@@ -333,15 +335,17 @@ else:
 # Messages to be saved for later
 messagesForLater = []
 
-for mon in range(iteratetimes):
+for moni, mon in enumerate(monitors):
     print("")
-    advPrint("Iteration "+str(mon))
+    advPrint("Iteration "+str(moni))
     monitor = monitors[mon]
-    monwid = monitor.width-2*widthreduce
+    # weird kde6 bug
+    # monitor = monitors[iteratetimes-mon-1]
+    monwid = monitor[0]-2*widthreduce
 
-    advPrint("Editing image "+str(mon))
+    advPrint("Editing image "+str(moni))
     with Image.open(sbgpath) as im:
-        im = softresize(im, (monitor.width, monitor.height), im.size)
+        im = softresize(im, (monitor[0], monitor[1]), im.size)
 
         # Drawn layers: first list is list of layers, nested list is list of periods in that layer
         drawn=[[]]
@@ -413,7 +417,7 @@ for mon in range(iteratetimes):
                 for j in layer:
                     if isOverlap(i['startdatetime'],i['finishdatetime'],j['startdatetime'],j['finishdatetime']) or (i['startdatetime']==j['startdatetime'] and i['finishdatetime']==j['finishdatetime']):
                         overlapInLayer = True
-                        if mon==0:
+                        if moni==0:
                             messagesForLater.append("Overlap detected between \""+i['title']+"\" and \""+j['title']+"\"")
                 # If there is an overlap and the period doesn't have a previous layer where it doesn't overlap
                 if overlapInLayer and o==overlap:
@@ -422,12 +426,17 @@ for mon in range(iteratetimes):
             # Decide on colour for subject
             if i['title'] in subjectColours:
                 colorHSV = (subjectColours[i['title']],saturation,value)
+                outlineHSV = (subjectColours[i['title']],saturation,value-0.1)
             else:
                 hash = hashlib.md5(i['title'].encode('utf8')).digest()[0]
                 colorHSV = (hash/255,saturation,value)
+                outlineHSV = (hash/255,saturation,value-0.1)
             color = hsv_to_rgb(colorHSV[0],colorHSV[1],colorHSV[2])
             color = (round(color[0]*255),round(color[1]*255),round(color[2]*255),255)
 
+            outline = hsv_to_rgb(outlineHSV[0],outlineHSV[1],outlineHSV[2])
+            outline = (round(outline[0]*255),round(outline[1]*255),round(outline[2]*255),255)
+            
             # Draw rectangle to encase text
             shape = [
                 i['position'].total_seconds()/dayLength.total_seconds()*monwid+periodxspace/2+widthreduce, #x0, position normalised to display width
@@ -435,7 +444,7 @@ for mon in range(iteratetimes):
                 (i['position'].total_seconds()+i['length'].total_seconds())/dayLength.total_seconds()*monwid-periodxspace/2+widthreduce, #x1 position+length normalised to display width
                 basey+height+heightIncrement*overlap #y1
                 ] 
-            drawIm.rounded_rectangle(shape, fill=color, radius=roundradius)
+            drawIm.rounded_rectangle(shape, fill=color, radius=roundradius, outline=outline)
             location = i['location']
 
             # Write text
@@ -444,12 +453,12 @@ for mon in range(iteratetimes):
             if not location.lower() in disregardLoc:
                 text += location+seperator
             else:
-                if mon==0:
+                if moni==0:
                     messagesForLater.append("No location found for \""+i['title']+"\"")
             text +=i['title']+seperator+i['starttime']
             if includeTeacher:
                 text += seperator+i['teachercode']
-            if mon==0:
+            if moni==0:
                 advPrint(text)
 
             tbbox=drawIm.textbbox([0,0], text, font=font)
@@ -470,11 +479,11 @@ for mon in range(iteratetimes):
             drawn[overlap].append(i)
 
         # Save image
-        im.save(appdata+'/tempbg'+str(mon)+'.png', "PNG")
-        advPrint("Finished editing image "+str(mon))
+        im.save(appdata+'/tempbg'+str(moni)+'.png', "PNG")
+        advPrint("Finished editing image "+str(moni))
 
         # Set image as wallpaper
-        CrossPlatformSetWallpaper(multimonitor="both", location=appdata+'/tempbg'+str(mon)+'.png', desktop=mon)
+        CrossPlatformSetWallpaper(multimonitor="both", location=appdata+'/tempbg'+str(moni)+'.png', desktop=mon)
         # if system == "Windows":
         #     advPrint("Using windll to set wallpaper")
         #     windll.user32.SystemParametersInfoW(20, 0, appdata+'/tempbg'+str(mon)+'.png', 0)
